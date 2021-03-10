@@ -13,6 +13,7 @@
 
 
 ### Install Docker 
+[My instructions are here](https://github.com/sergeicu/anima-docker/blob/main/install-docker.md)
 
 ### Dockerhub vs Github 
 
@@ -29,7 +30,8 @@
 
 ### Docker cheatsheet 
 ![image](https://github.com/sergeicu/docker_intro/blob/main/assets/build_share.png)
-![image](https://github.com/sergeicu/docker_intro/blob/main/assets/run.png)
+![image](https://github.com/sergeicu/docker_intro/blob/main/assets/run.png)  
+
 [Source](https://www.docker.com/sites/default/files/d8/2019-09/docker-cheat-sheet.pdf)
 
 ### Docker and python 
@@ -68,10 +70,16 @@ Follow my guide on [E2](https://github.com/sergeicu/e2/blob/main/research-comput
 
 ### Build your code within docker to do one thing 
 
-
-
 ### Singularity vs Docker 
 ![image](https://github.com/sergeicu/docker_intro/blob/main/assets/docker8.png)
+
+### Flywheel 
+- Flywheel builds tools that wrap around containers.-
+- Flywheel uses singularity instead of docker for reasons highlighted above. 
+- Once you build 2-3 of your own docker images, you should be able to proceed to Flywheel tutorials relatively easily (else it would be a real struggle) 
+- Flywheel tutorial can be found [here](https://docs.flywheel.io/hc/en-us/sections/360003262473-Getting-Started-Guide-for-Developers). 
+
+
 
 ### BCH Proxies 
 
