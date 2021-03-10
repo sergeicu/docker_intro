@@ -24,21 +24,22 @@
 
 
 
-### Deploy other people's Docker images
+### Deploy ready made Docker images as containers 
+
 #### Case study 1: anima software
 - Background: I needed to estimate Myelin Water Fraction maps for my data with a conventional (non deep learning) algorithm. 
 - Problem: The algorithm was available as 1. C++ source code that needed to be compiled 2. Ubuntu OS binary files. I had tried to compile this software from source code to no avail. 
 - Solution: I decided to use precompiled binaries. Note that binaries were NOT available for CentOS. So I built a Docker Ubuntu image instead and ran this software from within docker container. 
 
 
-Pull:
+Pull:  
 - `docker pull sergeicu/anima_t2_only`
-Run:
+Run:  
 - `docker run -it --rm sergeicu/anima_t2_only /bin/bash`
 - `-it` - run interactively  
 - `--rm` - delete container once you exit it 
 - `/bin/bash` - initial command to run 
-Expose your own data: 
+Expose your own data:   
 - `docker run -it --rm -v $localfolder:/data sergeicu/anima_t2_only /bin/bash`
 - `$localfolder` - full path to your folder. 
 - `/data` - location (&name!) of this folder inside docker  
@@ -52,9 +53,9 @@ WARNING: you absolutely must run `chmod ugo+rw $localfolder` before starting thi
 - Problem: The toolbox was available as 1. C++ source code that needed to be compiled 2. Docker image. It would take me hours to compile this C++ source code into binaries. 
 - Solution: I decided NOT to spend hours compiling this software and just run docker image in <1hour. 
 
-Pull: 
+Pull:   
 - `docker pull biomedia/mirtk`
-Run: 
+Run:   
 - `docker run -it --rm -v $outdir:/data biomedia/mirtk transform-image $input $output -sinc -target $target` 
 - `transform-image` - is a command that is invoked straight away as docker image is deployed into a container. This removes the need to access Docker interactively (which we do via `/bin/bash`) 
 - `$input $output -sinc -target $target` - this are the standard input arguments that this command would require. 
@@ -79,7 +80,7 @@ Run:
 
 
 
-### Build your own Docker 
+### Build your own Docker image
 
 A Docker image consists of read-only layers each of which represents a Dockerfile instruction. The layers are stacked and each one is a delta of the changes from the previous layer. Consider this Dockerfile:
 ```
@@ -123,7 +124,7 @@ RUN chmod 666 /run_anima.py
 CMD ["python", "/run_anima.py"]
 ```
 
-Build: 
+Build:   
 - `cd $directory_with_Dockerfile`
 - `docker build --no-cache -t $name_for_your_image .` 
 - `$name_for_your_image` - by convention we set this to - `<dockerhub_username>/<docker_name>:<build_release>` - e.g. `sergeicu/anima:latest`
