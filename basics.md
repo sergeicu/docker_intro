@@ -2,10 +2,13 @@
 
 #### VM vs containers 
 ![Filezilla-screenshot](https://github.com/sergeicu/docker_intro/blob/main/assets/docker2.png)
-![Filezilla-screenshot](https://github.com/sergeicu/docker_intro/blob/main/assets/docker3.png)
-
-#### docker images vs docker containers 
-#### docker work pipeline 
+![Filezilla-screenshot](https://github.com/sergeicu/docker_intro/blob/main/assets/docker7.png)
+![Filezilla-screenshot](https://github.com/sergeicu/docker_intro/blob/main/assets/docker7.png)
+#### Dockerfiles, images, containers, dockerhub
+![Filezilla-screenshot](https://github.com/sergeicu/docker_intro/blob/main/assets/docker5.png)
+![Filezilla-screenshot](https://github.com/sergeicu/docker_intro/blob/main/assets/docker4.png)
+#### Workflow 
+![Filezilla-screenshot](https://github.com/sergeicu/docker_intro/blob/main/assets/docker6.png)
 
 
 ### Install Docker 
