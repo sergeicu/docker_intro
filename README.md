@@ -2,6 +2,5 @@
 
 Quick Guide to Docker for CRL. 
 
-[Basics](https://github.com/sergeicu/docker_intro/blob/main/basics.md)
-
-
+1. [Basics (link)](https://github.com/sergeicu/docker_intro/blob/main/basics.md)
+2. tbc
