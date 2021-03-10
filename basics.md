@@ -16,13 +16,15 @@
 [My instructions are here](https://github.com/sergeicu/anima-docker/blob/main/install-docker.md)
 
 ### Dockerhub vs Github 
+- Dockerhub is just like Github, but for Docker images. 
+- Instead of spending hours/days on building your own images, you can re-use someone's recipes that have already been compiled into Docker images. 
+- Simply do `docker pull $username/$imagename:$tagname`
+- e.g. `docker pull ubuntu:latest` - pulls a Docker Ubuntu image
+- run it via `docker run ubuntu:latest /bin/bash` - you can immediately access a terminal inside an ubuntu operating system and test your app with it 
 
-### Download someone's container 
-#### docker hub 
-#### docker pull command 
 
 
-### Deploy someone's Docker 
+### Deploy other people's Docker images
 #### Case study 1: anima software
 - Background: I needed to estimate Myelin Water Fraction maps for my data with a conventional (non deep learning) algorithm. 
 - Problem: The algorithm was available as 1. C++ source code that needed to be compiled 2. Ubuntu OS binary files. I had tried to compile this software from source code to no avail. 
@@ -42,40 +44,6 @@ Expose your own data:
 - `/data` - location (&name!) of this folder inside docker  
 
 WARNING: you absolutely must run `chmod ugo+rw $localfolder` before starting this Docker container. Else Docker will not be able to access your data. This gives read/write access to ALL users. 
-
-Dockerfile for this image: 
-```
-FROM ubuntu:18.04
-
-MAINTAINER Serge V "serge.vasylechko@tch.harvard.edu"
-
-# basic tools   
-RUN apt-get update && apt-get install -y \
-    unzip \ 
-    wget  
-
-# Anima binaries   
-RUN wget https://github.com/Inria-Visages/Anima-Public/releases/download/v4.0/Anima-Ubuntu-4.0.zip && unzip Anima-Ubuntu-4.0.zip && rm -rf Anima-Ubuntu-4.0.zip && mv Anima-Binaries-4.0/ anima/
-
-# python3 
-RUN apt-get install -y python3-pip python3-dev \
-  && cd /usr/local/bin \
-  && ln -s /usr/bin/python3 python \
-  && pip3 install --upgrade pip
-
-# anima helper script 
-COPY src/run_anima.py /
-RUN chmod 666 /run_anima.py
-
-CMD ["python", "/run_anima.py"]
-```
-
-Build: 
-- `cd $directory_with_Dockerfile`
-- `docker build --no-cache -t $name_for_your_image .` 
-- `$name_for_your_image` - by convention we set this to - `<dockerhub_username>/<docker_name>:<build_release>` - e.g. `sergeicu/anima:latest`
-- `--no-cache` - builds from scratch (not always necessary but can be a life saviour in certain situations)
-
 
 [source](https://hub.docker.com/r/sergeicu/anima_t2_only)
 
@@ -128,11 +96,48 @@ Each instruction creates one layer:
 
 [source](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
 
-### Docker and python 
+Here is example of my own Dockerfile for 'anima' software (see above for more info): 
+```
+FROM ubuntu:18.04
 
+MAINTAINER Serge V "serge.vasylechko@tch.harvard.edu"
+
+# basic tools   
+RUN apt-get update && apt-get install -y \
+    unzip \ 
+    wget  
+
+# Anima binaries   
+RUN wget https://github.com/Inria-Visages/Anima-Public/releases/download/v4.0/Anima-Ubuntu-4.0.zip && unzip Anima-Ubuntu-4.0.zip && rm -rf Anima-Ubuntu-4.0.zip && mv Anima-Binaries-4.0/ anima/
+
+# python3 
+RUN apt-get install -y python3-pip python3-dev \
+  && cd /usr/local/bin \
+  && ln -s /usr/bin/python3 python \
+  && pip3 install --upgrade pip
+
+# anima helper script 
+COPY src/run_anima.py /
+RUN chmod 666 /run_anima.py
+
+CMD ["python", "/run_anima.py"]
+```
+
+Build: 
+- `cd $directory_with_Dockerfile`
+- `docker build --no-cache -t $name_for_your_image .` 
+- `$name_for_your_image` - by convention we set this to - `<dockerhub_username>/<docker_name>:<build_release>` - e.g. `sergeicu/anima:latest`
+- `--no-cache` - builds from scratch (not always necessary but can be a life saviour in certain situations)
+
+
+
+### Docker and python 
+There are many flavours of python ready made images that you can pull from docker hub. e.g. 
+- https://hub.docker.com/_/python - full python image (100+Mb)
+- https://hub.docker.com/_/alpine - tiny python image (<10Mb) 
 
 ### Docker and conda 
-
+TBC 
 
 ### Docker and GPU 
 - This requires a special setup as you will need to provide Docker with route to your GPU config. 
@@ -154,14 +159,6 @@ Follow my guide on [E2](https://github.com/sergeicu/e2/blob/main/research-comput
 
 
 
-### Expose Docker to external files 
-
-### Expose Docker to external ports 
-
-### Expose docker to external code 
-
-### Build your code within docker to do one thing 
-
 ### Singularity vs Docker 
 ![image](https://github.com/sergeicu/docker_intro/blob/main/assets/docker8.png)
 
@@ -171,7 +168,13 @@ Follow my guide on [E2](https://github.com/sergeicu/e2/blob/main/research-comput
 - Once you build 2-3 of your own docker images, you should be able to proceed to Flywheel tutorials relatively easily (else it would be a real struggle) 
 - Flywheel tutorial can be found [here](https://docs.flywheel.io/hc/en-us/sections/360003262473-Getting-Started-Guide-for-Developers). 
 
-
-
 ### BCH Proxies 
+TBC 
 
+### Expose Docker to external ports 
+- tbc 
+ 
+### Expose docker to external code 
+- tbc 
+### Build your code within docker to do one thing 
+- tbc 
