@@ -1,9 +1,10 @@
 ### What is Docker 
 
 #### VM vs containers 
+
+![Filezilla-screenshot](https://github.com/sergeicu/docker_intro/blob/main/assets/docker7.png)
 ![Filezilla-screenshot](https://github.com/sergeicu/docker_intro/blob/main/assets/docker2.png)
-![Filezilla-screenshot](https://github.com/sergeicu/docker_intro/blob/main/assets/docker7.png)
-![Filezilla-screenshot](https://github.com/sergeicu/docker_intro/blob/main/assets/docker7.png)
+
 #### Dockerfiles, images, containers, dockerhub
 ![Filezilla-screenshot](https://github.com/sergeicu/docker_intro/blob/main/assets/docker5.png)
 ![Filezilla-screenshot](https://github.com/sergeicu/docker_intro/blob/main/assets/docker4.png)
@@ -55,6 +56,7 @@ tbc
 
 
 ### Singularity vs Docker 
+![Filezilla-screenshot](https://github.com/sergeicu/docker_intro/blob/main/assets/docker8.png)
 
 ### BCH Proxies 
 
