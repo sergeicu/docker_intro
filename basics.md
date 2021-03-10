@@ -2,6 +2,8 @@
 
 #### VM vs containers 
 ![Filezilla-screenshot](https://github.com/sergeicu/docker_intro/blob/main/assets/docker2.png)
+![Filezilla-screenshot](https://github.com/sergeicu/docker_intro/blob/main/assets/docker3.png)
+
 #### docker images vs docker containers 
 #### docker work pipeline 
 
