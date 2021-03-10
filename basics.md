@@ -2,14 +2,14 @@
 
 #### VM vs containers 
 
-![Filezilla-screenshot](https://github.com/sergeicu/docker_intro/blob/main/assets/docker7.png)
-![Filezilla-screenshot](https://github.com/sergeicu/docker_intro/blob/main/assets/docker2.png)
+![image](https://github.com/sergeicu/docker_intro/blob/main/assets/docker7.png)
+![image](https://github.com/sergeicu/docker_intro/blob/main/assets/docker2.png)
 
 #### Dockerfiles, images, containers, dockerhub
-![Filezilla-screenshot](https://github.com/sergeicu/docker_intro/blob/main/assets/docker5.png)
-![Filezilla-screenshot](https://github.com/sergeicu/docker_intro/blob/main/assets/docker4.png)
+![image](https://github.com/sergeicu/docker_intro/blob/main/assets/docker5.png)
+![image](https://github.com/sergeicu/docker_intro/blob/main/assets/docker4.png)
 #### Workflow 
-![Filezilla-screenshot](https://github.com/sergeicu/docker_intro/blob/main/assets/docker6.png)
+![image](https://github.com/sergeicu/docker_intro/blob/main/assets/docker6.png)
 
 
 ### Install Docker 
@@ -28,6 +28,8 @@
 ### eg 4 dce reconstruction 
 
 ### Docker cheatsheet 
+![image](https://github.com/sergeicu/docker_intro/blob/main/assets/build_share.png)
+![image](https://github.com/sergeicu/docker_intro/blob/main/assets/run.png)
 [Source](https://www.docker.com/sites/default/files/d8/2019-09/docker-cheat-sheet.pdf)
 
 ### Docker and python 
@@ -69,7 +71,7 @@ Follow my guide on [E2](https://github.com/sergeicu/e2/blob/main/research-comput
 
 
 ### Singularity vs Docker 
-![Filezilla-screenshot](https://github.com/sergeicu/docker_intro/blob/main/assets/docker8.png)
+![image](https://github.com/sergeicu/docker_intro/blob/main/assets/docker8.png)
 
 ### BCH Proxies 
 
