@@ -23,16 +23,110 @@
 
 
 ### Deploy someone's Docker 
-### eg 1 anima 
-### eg 2 biomedia 
-### eg 3 crkit 
-### eg 4 dce reconstruction 
+#### Case study 1: anima software
+- Background: I needed to estimate Myelin Water Fraction maps for my data with a conventional (non deep learning) algorithm. 
+- Problem: The algorithm was available as 1. C++ source code that needed to be compiled 2. Ubuntu OS binary files. I had tried to compile this software from source code to no avail. 
+- Solution: I decided to use precompiled binaries. Note that binaries were NOT available for CentOS. So I built a Docker Ubuntu image instead and ran this software from within docker container. 
+
+
+Pull:
+- `docker pull sergeicu/anima_t2_only`
+Run:
+- `docker run -it --rm sergeicu/anima_t2_only /bin/bash`
+- `-it` - run interactively  
+- `--rm` - delete container once you exit it 
+- `/bin/bash` - initial command to run 
+Expose your own data: 
+- `docker run -it --rm -v $localfolder:/data sergeicu/anima_t2_only /bin/bash`
+- `$localfolder` - full path to your folder. 
+- `/data` - location (&name!) of this folder inside docker  
+
+WARNING: you absolutely must run `chmod ugo+rw $localfolder` before starting this Docker container. Else Docker will not be able to access your data. This gives read/write access to ALL users. 
+
+Dockerfile for this image: 
+```
+FROM ubuntu:18.04
+
+MAINTAINER Serge V "serge.vasylechko@tch.harvard.edu"
+
+# basic tools   
+RUN apt-get update && apt-get install -y \
+    unzip \ 
+    wget  
+
+# Anima binaries   
+RUN wget https://github.com/Inria-Visages/Anima-Public/releases/download/v4.0/Anima-Ubuntu-4.0.zip && unzip Anima-Ubuntu-4.0.zip && rm -rf Anima-Ubuntu-4.0.zip && mv Anima-Binaries-4.0/ anima/
+
+# python3 
+RUN apt-get install -y python3-pip python3-dev \
+  && cd /usr/local/bin \
+  && ln -s /usr/bin/python3 python \
+  && pip3 install --upgrade pip
+
+# anima helper script 
+COPY src/run_anima.py /
+RUN chmod 666 /run_anima.py
+
+CMD ["python", "/run_anima.py"]
+```
+
+Build: 
+- `cd $directory_with_Dockerfile`
+- `docker build --no-cache -t $name_for_your_image .` 
+- `$name_for_your_image` - by convention we set this to - `<dockerhub_username>/<docker_name>:<build_release>` - e.g. `sergeicu/anima:latest`
+- `--no-cache` - builds from scratch (not always necessary but can be a life saviour in certain situations)
+
+
+[source](https://hub.docker.com/r/sergeicu/anima_t2_only)
+
+#### Case study 2: biomedia/mirtk toolbox 
+- Background: I needed to use a toolbox from my PhD supervisor's group to do some registration / interpolation tests. 
+- Problem: The toolbox was available as 1. C++ source code that needed to be compiled 2. Docker image. It would take me hours to compile this C++ source code into binaries. 
+- Solution: I decided NOT to spend hours compiling this software and just run docker image in <1hour. 
+
+Pull: 
+- `docker pull biomedia/mirtk`
+Run: 
+- `docker run -it --rm -v $outdir:/data biomedia/mirtk transform-image $input $output -sinc -target $target` 
+- `transform-image` - is a command that is invoked straight away as docker image is deployed into a container. This removes the need to access Docker interactively (which we do via `/bin/bash`) 
+- `$input $output -sinc -target $target` - this are the standard input arguments that this command would require. 
+- If I would have compiler this software on CentOS, executing it would be without Docker would be like this: `biomedia/mirtk transform-image $input $output -sinc -target $target` 
+
+[source](https://hub.docker.com/r/biomedia/mirtk)
+#### Case study 3: crkit docker
+(WARNING: work in progress) 
+- Background: I wanted to make crkit available on my local home computer, which uses Windows 
+- Problem: I would not be able to run crkit using Windows. I could only install it via linux system. 
+- Solution: I decided to build a crkit docker, so it could be deployed by anyone anywhere (with docker access) 
+
+[Link (warning - work in progress)](https://github.com/sergeicu/crkit-docker)
+
+#### eg 4 dce reconstruction 
 
 ### Docker cheatsheet 
 ![image](https://github.com/sergeicu/docker_intro/blob/main/assets/build_share.png)
 ![image](https://github.com/sergeicu/docker_intro/blob/main/assets/run.png)  
 
 [Source](https://www.docker.com/sites/default/files/d8/2019-09/docker-cheat-sheet.pdf)
+
+
+
+### Build your own Docker 
+
+A Docker image consists of read-only layers each of which represents a Dockerfile instruction. The layers are stacked and each one is a delta of the changes from the previous layer. Consider this Dockerfile:
+```
+FROM ubuntu:18.04
+COPY . /app
+RUN make /app
+CMD python /app/app.py
+Each instruction creates one layer:
+```
+`FROM` creates a layer from the ubuntu:18.04 Docker image.
+`COPY` adds files from your Docker client’s current directory.
+`RUN` builds your application with make.
+`CMD` specifies what command to run within the container.
+
+[source](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
 
 ### Docker and python 
 
@@ -41,7 +135,9 @@
 
 
 ### Docker and GPU 
-This requires a special setup as you will need to provide Docker with route to your GPU config. Best idea is to start with NVIDIA docker image [here](https://github.com/NVIDIA/nvidia-docker).  
+- This requires a special setup as you will need to provide Docker with route to your GPU config. 
+- Best place to start is NVIDIA docker image [here](https://github.com/NVIDIA/nvidia-docker).  
+- Example Docker image is [here](https://github.com/sergeicu/docker_intro/blob/main/gpu.md)
 
 TBC: add more links here 
 
@@ -56,10 +152,6 @@ TBC: add more links here
 IMPORTANT: Compiler is NOT installed on CRL machines, but it is available on matlab supplied via Research Computing.   
 Follow my guide on [E2](https://github.com/sergeicu/e2/blob/main/research-computing.md) and setup an interactive matlab session like [here](http://websvc4.tch.harvard.edu:8090/display/RCK/Visualization+job) (require VPN access). Then follow Matlab Compiler tutorial [here](https://www.mathworks.com/help/compiler/getting-started-with-matlab-compiler.html). Ask me or Yao for help if necessary.   
 
-### Build your own Docker 
-#### centos 
-#### ubuntu 
-#### python libraries 
 
 
 ### Expose Docker to external files 
