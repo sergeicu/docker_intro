@@ -1,30 +1,34 @@
 ### What is Docker 
 
 #### VM vs containers 
-
+goal: explain the difference between Virtual Machines and Containers (such as Docker or Singularity containers) 
 ![image](https://github.com/sergeicu/docker_intro/blob/main/assets/docker7.png)
 ![image](https://github.com/sergeicu/docker_intro/blob/main/assets/docker2.png)
 
 #### Dockerfiles, images, containers, dockerhub
+goal: explain the main building blocks of docker ecosystem and the differences between them. 
 ![image](https://github.com/sergeicu/docker_intro/blob/main/assets/docker5.png)
 ![image](https://github.com/sergeicu/docker_intro/blob/main/assets/docker4.png)
 #### Workflow 
+goal: show a basic workflow schedule and explain why it is needed
 ![image](https://github.com/sergeicu/docker_intro/blob/main/assets/docker6.png)
 
 
 ### Install Docker 
 [My instructions are here](https://github.com/sergeicu/anima-docker/blob/main/install-docker.md)
 
-### Dockerhub vs Github 
+### Dockerhub vs Github
 - Dockerhub is just like Github, but for Docker images. 
+- It is a repository of pre-built Docker images
 - Instead of spending hours/days on building your own images, you can re-use someone's recipes that have already been compiled into Docker images. 
-- Simply do `docker pull $username/$imagename:$tagname`
+- Simply do `docker pull $username/$imagename:$tagname` (equivalent to `git clone $repository_name`)
 - e.g. `docker pull ubuntu:latest` - pulls a Docker Ubuntu image
 - run it via `docker run ubuntu:latest /bin/bash` - you can immediately access a terminal inside an ubuntu operating system and test your app with it 
 
 
 
 ### Deploy ready made Docker images as containers 
+Use prebuild images immediately. 
 
 #### Case study 1: anima software
 - Background: I needed to estimate Myelin Water Fraction maps for my data with a conventional (non deep learning) algorithm. 
@@ -62,6 +66,7 @@ Run:
 - If I would have compiler this software on CentOS, executing it would be without Docker would be like this: `biomedia/mirtk transform-image $input $output -sinc -target $target` 
 
 [source](https://hub.docker.com/r/biomedia/mirtk)
+
 #### Case study 3: crkit docker
 (WARNING: work in progress) 
 - Background: I wanted to make crkit available on my local home computer, which uses Windows 
@@ -70,7 +75,14 @@ Run:
 
 [Link (warning - work in progress)](https://github.com/sergeicu/crkit-docker)
 
-#### eg 4 dce reconstruction 
+#### Case study 4: Dynamic Contrast Enhanced Reconstruction (DCE)
+(WARNING: work in progress) 
+- Background: We need to share our code with collaborators, which consists of python + matlab code. 
+- Problem: Our collaborators want to use a single line command to reconstruct their MRI data. They don't have capacity/time/ability to reproduce our software environment, including the exact operating system, python dependencies, and necessary matlab license,etc 
+- Solution: We are building a docker image that we can send them and they can simply do `docker run $image_name $command_name $input $output $other_options` 
+
+TBC (warning - work in progress)
+
 
 ### Docker cheatsheet 
 ![image](https://github.com/sergeicu/docker_intro/blob/main/assets/build_share.png)
@@ -138,7 +150,7 @@ There are many flavours of python ready made images that you can pull from docke
 - https://hub.docker.com/_/alpine - tiny python image (<10Mb) 
 
 ### Docker and conda 
-TBC 
+TBC - in short - no necessity to use conda. Can just use pip directly. But conda can also be installed. 
 
 ### Docker and GPU 
 - This requires a special setup as you will need to provide Docker with route to your GPU config. 
