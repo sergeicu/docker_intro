@@ -13,3 +13,4 @@ TODO:
 - Add links to example repos (e.g. my anima repo, crkit repo, matlab repo) 
 - Fix crkit docker 
 - Fix matlab docker 
++ bch proxies, external ports, volumes, build docker to do one thing vs many things, docker GPU guide (more thorough), fix alpine ref - its linux not python image, put case studies first
