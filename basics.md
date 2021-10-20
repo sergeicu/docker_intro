@@ -167,8 +167,8 @@ TBC: add more links here
 - Package your matlab binaries with MCR into a Dockerfile. Flywheel has provided us with recipes for building docker images with MCR [here](https://github.com/flywheel-apps/matlab-mcr)
 
 
-IMPORTANT: Compiler is NOT installed on CRL machines, but it is available on matlab supplied via Research Computing.   
-Follow my guide on [E2](https://github.com/sergeicu/e2/blob/main/research-computing.md) and setup an interactive matlab session like [here](http://websvc4.tch.harvard.edu:8090/display/RCK/Visualization+job) (require VPN access). Then follow Matlab Compiler tutorial [here](https://www.mathworks.com/help/compiler/getting-started-with-matlab-compiler.html). Ask me or Yao for help if necessary.   
+<!-- IMPORTANT: Compiler is NOT installed on CRL machines, but it is available on matlab supplied via Research Computing.   
+Follow my guide on [E2](https://github.com/sergeicu/e2/blob/main/research-computing.md) and setup an interactive matlab session like [here](http://websvc4.tch.harvard.edu:8090/display/RCK/Visualization+job) (require VPN access). Then follow Matlab Compiler tutorial [here](https://www.mathworks.com/help/compiler/getting-started-with-matlab-compiler.html). Ask me or Yao for help if necessary.  --> 
 
 
 
